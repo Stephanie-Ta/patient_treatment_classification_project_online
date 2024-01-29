@@ -1,3 +1,5 @@
+# Introduction
+
 Hospitals are involved in both inpatient and outpatient care.
 
 Inpatient care involves staying at the hospital overnight and longer-term care.
