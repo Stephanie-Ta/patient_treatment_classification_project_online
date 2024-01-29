@@ -3,7 +3,9 @@
 
 format: jb-book
 root: Introduction
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+  - caption: Analysis
+  chapters:
+  - file: Exploratory_Data_Analysis.ipynb
+  - file: notebooks
+  - file: markdown-notebooks
