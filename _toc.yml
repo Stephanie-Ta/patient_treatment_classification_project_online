@@ -4,8 +4,11 @@
 format: jb-book
 root: Introduction
 parts:
+  - caption: Information
+    chapters:
+    - file: Lab_Result_Info.md
   - caption: Analysis
-  chapters:
-  - file: Exploratory_Data_Analysis.ipynb
-  - file: notebooks
-  - file: markdown-notebooks
+    chapters:
+    - file: Exploratory_Data_Analysis.ipynb
+    - file: notebooks
+    - file: markdown-notebooks
