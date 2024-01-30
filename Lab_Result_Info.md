@@ -4,13 +4,13 @@ I will be using the lab results provided in the dataset (haematocrit, Haemoglobi
 
 More information about each variable is provided below.
 
-| Haematocrit level (% of blood volume) | explanation |
-| Haemoglobin level (g/dl) | explanation |
-| Erythrocyte level (million/ml) | explanation |
-| Leucocyte level (thousand/mcl) | explanation |
-| Thrombocyte level (thousand/mcl) | explanation |
-| MCH level (pg/cell) | explanation |
-| MCHC level (g/dl) | explanation |
-| MCV level (fl) | explanation |
-| Age (years) | explanation |
-| Sex | explanation |
+| Haematocrit level (% of blood volume) | explanation |  
+| Haemoglobin level (g/dl) | explanation |  
+| Erythrocyte level (million/ml) | explanation |  
+| Leucocyte level (thousand/mcl) | explanation |  
+| Thrombocyte level (thousand/mcl) | explanation |  
+| MCH level (pg/cell) | explanation |  
+| MCHC level (g/dl) | explanation |  
+| MCV level (fl) | explanation |  
+| Age (years) | explanation |  
+| Sex | explanation |  
