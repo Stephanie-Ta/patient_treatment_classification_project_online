@@ -11,3 +11,7 @@ parts:
     chapters:
     - file: Exploratory_Data_Analysis.ipynb
     - file: Methods_and_Results.ipynb
+    - file: Exploring_the_Model.ipynb
+  - caption: Discussion
+    chapters:
+    - file: Discussion.md
