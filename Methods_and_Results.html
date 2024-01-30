@@ -382,6 +382,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-model">Baseline Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-classifier">KNN Classifier</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-tuning">Parameter Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-testing">Training and Testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
 </ul>
 </li>
@@ -484,8 +485,8 @@ No imputation is needed since there are no missing values in the dataset.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fit_time           0.004964
-score_time         0.065093
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fit_time           0.004532
+score_time         0.058529
 test_accuracy      0.516296
 train_accuracy     0.513318
 test_precision     0.406146
@@ -542,6 +543,9 @@ dtype: float64
 </div>
 </div>
 <p>As shown above, 19 is the best k value from 1 to 20 and yields a validation score of 74% which is much higher compared to the validation score of the DummyClassifier (52%).</p>
+</section>
+<section id="training-and-testing">
+<h3>Training and Testing<a class="headerlink" href="#training-and-testing" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make new model with best k</span>
@@ -692,6 +696,7 @@ weighted avg       0.73      0.73      0.72       883
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-model">Baseline Model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-classifier">KNN Classifier</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-tuning">Parameter Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-testing">Training and Testing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
 </ul>
 </li>
