@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Methods_and_Results';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Exploring the Model" href="Exploring_the_Model.html" />
     <link rel="prev" title="Exploratory Data Analysis" href="Exploratory_Data_Analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,12 +172,17 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Information</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Lab_Result_Info.html">Variables in the Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab_Result_Info.html">Features in the Dataset</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Analysis</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Exploratory_Data_Analysis.html">Exploratory Data Analysis</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Methods and Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exploring_the_Model.html">Exploring the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Discussion</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Discussion.html">Discussion</a></li>
 </ul>
 
     </div>
@@ -349,7 +355,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -365,6 +373,20 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-the-data">Preprocessing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-model">Baseline Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-classifier">KNN Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-tuning">Parameter Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -376,6 +398,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="methods-and-results">
 <h1>Methods and Results<a class="headerlink" href="#methods-and-results" title="Permalink to this heading">#</a></h1>
+<p>Since we are predicting a categorical variable, we will use KNN Classification to conduct our analysis and compare it to a baseline model using a DummyClassifier. We’ll start by importing the necessary packages, reading in the data, splitting the data into train and test splits, and then separating the feature columns from the target column.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing required libraries for analysis</span>
@@ -391,7 +414,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">make_pipeline</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
-<span class="c1"># from sklearn.metrics import  plot_confusion_matrix, classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span>  <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">classification_report</span>
 
 <span class="c1"># setting random state to have reproducible results</span>
 <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span>
@@ -401,13 +424,8 @@ document.write(`
 
 <span class="c1"># splitting data into train and test splits</span>
 <span class="n">patient_train</span><span class="p">,</span> <span class="n">patient_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">patient_data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">patient_data</span><span class="p">[</span><span class="s2">&quot;SOURCE&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># separate feature vectors from target</span>
+
+<span class="c1"># separate feature vectors from target</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">patient_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SOURCE&quot;</span><span class="p">])</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">patient_train</span><span class="p">[</span><span class="s2">&quot;SOURCE&quot;</span><span class="p">]</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">patient_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SOURCE&quot;</span><span class="p">])</span>
@@ -416,6 +434,11 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="preprocessing-the-data">
+<h2>Preprocessing the Data<a class="headerlink" href="#preprocessing-the-data" title="Permalink to this heading">#</a></h2>
+<p>Since KNN algorithm uses Euclidian distance to determine how similar data points are to each cluster center, we will scale in each numeric feature in our pre-processing so they have same effect on deciding cluster assignment.<br />
+To allow the binary feature to be used as a predictor, we converted the binary feature (sex) by assigning the values to be 0 or 1 instead of M or F.<br />
+No imputation is needed since there are no missing values in the dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preprocess features</span>
@@ -435,6 +458,10 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="baseline-model">
+<h2>Baseline Model<a class="headerlink" href="#baseline-model" title="Permalink to this heading">#</a></h2>
+<p>To create a baseline model to compare the final knn model to, I made a DummyClassifier that will predict the treatment randomly at a frequency respective to the treatment distribution of the training data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating DummyClassifier as a baseline model to compare estimators to</span>
@@ -457,8 +484,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fit_time           0.000000
-score_time         0.012507
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fit_time           0.004964
+score_time         0.065093
 test_accuracy      0.516296
 train_accuracy     0.513318
 test_precision     0.406146
@@ -472,10 +499,16 @@ dtype: float64
 </div>
 </div>
 </div>
+<p>As shown above, the DummyClassifier has a validation score of 52%</p>
+</section>
+<section id="knn-classifier">
+<h2>KNN Classifier<a class="headerlink" href="#knn-classifier" title="Permalink to this heading">#</a></h2>
+<section id="parameter-tuning">
+<h3>Parameter Tuning<a class="headerlink" href="#parameter-tuning" title="Permalink to this heading">#</a></h3>
+<p>To find the optimal value of k that maximizes the accuracy of the model, 5-fold cross-validation was used for values of k from 1 to 20.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># KNN</span>
-<span class="c1"># find the k value that yields the best accuracy estimate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find the k value that yields the best accuracy estimate</span>
 <span class="n">results_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="p">[],</span>
     <span class="s2">&quot;mean_train_score&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -494,40 +527,6 @@ dtype: float64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>n_neighbors</th>
-      <th>mean_train_score</th>
-      <th>mean_cv_score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>18</th>
-      <td>19</td>
-      <td>0.764169</td>
-      <td>0.740157</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -542,7 +541,7 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>As shown above, 19 is the best k value in range 0-20 and yields a cross validation score of 74%.</p>
+<p>As shown above, 19 is the best k value from 1 to 20 and yields a validation score of 74% which is much higher compared to the validation score of the DummyClassifier (52%).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make new model with best k</span>
@@ -566,7 +565,63 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>The accuracy of the knn classifier with k=19 is 73%.</p>
+<p>The accuracy score of the knn classifier with k=19 on the test set is 73%.</p>
+</section>
+<section id="model-evaluation">
+<h3>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this heading">#</a></h3>
+<p>To gain more insight into the KNN model’s performance, the following confusion matrix shows its predictions compared to the truth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
+
+<span class="n">cm_plot</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">cm</span><span class="p">,</span> <span class="n">display_labels</span><span class="o">=</span><span class="n">best_model</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">cm_plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;sklearn.metrics._plot.confusion_matrix.ConfusionMatrixDisplay at 0x1c3a434a9d0&gt;
+</pre></div>
+</div>
+<img alt="_images/6bdcd2d107e175b59b650ab2bbfb39ed0f36eda9515a21491c018f67fde3e88d.png" src="_images/6bdcd2d107e175b59b650ab2bbfb39ed0f36eda9515a21491c018f67fde3e88d.png" />
+</div>
+</div>
+<p><em>Figure 3: Confusion matrix of the KNN model’s predictions</em></p>
+<p>This confusion matrix shows that in the testing dataset:</p>
+<ul class="simple">
+<li><p>191 patients were correctly predicted to need in-patient care</p></li>
+<li><p>454 patients were correctly predicted to need out-patient care</p></li>
+<li><p>72 patients were incorrectly predicted to need in-patient care (they needed out-patient care)</p></li>
+<li><p>166 patients were incorrectly predicted to need out-patient care (they needed in-patient care)</p></li>
+</ul>
+<p>To gain even more understanding of the model’s performance, the classification report below shows the precision, recall, and f1 scores</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+          in       0.73      0.54      0.62       357
+         out       0.73      0.86      0.79       526
+
+    accuracy                           0.73       883
+   macro avg       0.73      0.70      0.70       883
+weighted avg       0.73      0.73      0.72       883
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The weighted average of the precision score was 0.73, meaning that when the classifier predicted that a patient needed in-patient care, it was correct 73% of the time.</p></li>
+<li><p>The weighted average of the recall score was 0.73, meaning that among the patients that needed in-patient care, it identified 73% of them.</p></li>
+<li><p>The weighted average of the f1 score was 0.72, which is the harmonic mean of precision and recall.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -608,6 +663,15 @@ dtype: float64
         <p class="prev-next-title">Exploratory Data Analysis</p>
       </div>
     </a>
+    <a class="right-next"
+       href="Exploring_the_Model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exploring the Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -615,7 +679,26 @@ dtype: float64
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-the-data">Preprocessing the Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-model">Baseline Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-classifier">KNN Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-tuning">Parameter Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
