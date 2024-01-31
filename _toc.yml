@@ -1,5 +1,4 @@
 # Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
 root: Introduction
@@ -12,6 +11,7 @@ parts:
     - file: Exploratory_Data_Analysis.ipynb
     - file: Methods_and_Results.ipynb
     - file: Exploring_the_Model.ipynb
-  - caption: Discussion
+  - caption: Conclusion
     chapters:
     - file: Discussion.md
+    - file: References.md
