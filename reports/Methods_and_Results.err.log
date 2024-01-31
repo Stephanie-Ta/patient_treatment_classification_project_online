@@ -1,17 +1,4 @@
 Traceback (most recent call last):
-  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 778, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\jupyter_core\utils\__init__.py", line 198, in ensure_async
-    result = await obj
-             ^^^^^^^^^
-  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\jupyter_client\channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "C:\Users\Stephanie\miniconda3\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
   File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 1305, in execute
@@ -25,20 +12,65 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^
   File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 1001, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 802, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 852, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['# find the k value that yields the best accuracy estimate', 'results_dict = {', '    "n_neighbors": [],', '    "mean_train_score": [],', '    "mean_cv_score": []}']
-...
-['    results_dict["mean_cv_score"].append(cv_scores["test_score"].mean())', '', 'results_df = pd.DataFrame(results_dict)', '', 'results_df.sort_values(by=["mean_cv_score"], ascending=False).head(1)']
--------------------
+  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\Stephanie\miniconda3\Lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+predictions = best_model.predict(X_test)
+
+# make a confusion matrix with the predictions
+cm = confusion_matrix(y_test, predictions, labels = best_model.classes_)
+
+# visualize the confusion matrix
+cm_plot = ConfusionMatrixDisplay(confusion_matrix = cm, display_labels=best_model.classes_).plot(cmap='Blues')
+cm_plot
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+File [1;32m~\miniconda3\Lib\site-packages\sklearn\utils\__init__.py:1239[0m, in [0;36mcheck_matplotlib_support[1;34m(caller_name)[0m
+[0;32m   1238[0m [38;5;28;01mtry[39;00m:
+[1;32m-> 1239[0m     [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m  [38;5;66;03m# noqa[39;00m
+[0;32m   1240[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
+
+[1;31mModuleNotFoundError[0m: No module named 'matplotlib'
+
+The above exception was the direct cause of the following exception:
+
+[1;31mImportError[0m                               Traceback (most recent call last)
+Cell [1;32mIn[7], line 7[0m
+[0;32m      4[0m cm [38;5;241m=[39m confusion_matrix(y_test, predictions, labels [38;5;241m=[39m best_model[38;5;241m.[39mclasses_)
+[0;32m      6[0m [38;5;66;03m# visualize the confusion matrix[39;00m
+[1;32m----> 7[0m cm_plot [38;5;241m=[39m [43mConfusionMatrixDisplay[49m[43m([49m[43mconfusion_matrix[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43mcm[49m[43m,[49m[43m [49m[43mdisplay_labels[49m[38;5;241;43m=[39;49m[43mbest_model[49m[38;5;241;43m.[39;49m[43mclasses_[49m[43m)[49m[38;5;241;43m.[39;49m[43mplot[49m[43m([49m[43mcmap[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mBlues[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[0;32m      8[0m cm_plot
+
+File [1;32m~\miniconda3\Lib\site-packages\sklearn\metrics\_plot\confusion_matrix.py:132[0m, in [0;36mConfusionMatrixDisplay.plot[1;34m(self, include_values, cmap, xticks_rotation, values_format, ax, colorbar, im_kw, text_kw)[0m
+[0;32m     81[0m [38;5;28;01mdef[39;00m [38;5;21mplot[39m(
+[0;32m     82[0m     [38;5;28mself[39m,
+[0;32m     83[0m     [38;5;241m*[39m,
+[1;32m   (...)[0m
+[0;32m     91[0m     text_kw[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[0;32m     92[0m ):
+[0;32m     93[0m [38;5;250m    [39m[38;5;124;03m"""Plot visualization.[39;00m
+[0;32m     94[0m 
+[0;32m     95[0m [38;5;124;03m    Parameters[39;00m
+[1;32m   (...)[0m
+[0;32m    130[0m [38;5;124;03m        that contains all the information to plot the confusion matrix.[39;00m
+[0;32m    131[0m [38;5;124;03m    """[39;00m
+[1;32m--> 132[0m     [43mcheck_matplotlib_support[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mConfusionMatrixDisplay.plot[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[0;32m    133[0m     [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[0;32m    135[0m     [38;5;28;01mif[39;00m ax [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+
+File [1;32m~\miniconda3\Lib\site-packages\sklearn\utils\__init__.py:1241[0m, in [0;36mcheck_matplotlib_support[1;34m(caller_name)[0m
+[0;32m   1239[0m     [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m  [38;5;66;03m# noqa[39;00m
+[0;32m   1240[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m e:
+[1;32m-> 1241[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
+[0;32m   1242[0m         [38;5;124m"[39m[38;5;132;01m{}[39;00m[38;5;124m requires matplotlib. You can install matplotlib with [39m[38;5;124m"[39m
+[0;32m   1243[0m         [38;5;124m"[39m[38;5;124m`pip install matplotlib`[39m[38;5;124m"[39m[38;5;241m.[39mformat(caller_name)
+[0;32m   1244[0m     ) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
+
+[1;31mImportError[0m: ConfusionMatrixDisplay.plot requires matplotlib. You can install matplotlib with `pip install matplotlib`
 
