@@ -1,5 +1,4 @@
 # Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
 
 title: Patient Treatment Classification Project
 author: Stephanie Ta
@@ -17,11 +16,11 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
+  url: https://stephanie-ta.github.io/patient_treatment_classification_project_online/Introduction.html
   branch: main
 
 # Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+# See https://github.com/Stephanie-Ta/patient_treatment_classification_project_online
 html:
-  use_issues_button: true
+  use_issues_button: false
   use_repository_button: true
