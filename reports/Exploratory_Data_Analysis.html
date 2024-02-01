@@ -380,7 +380,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read in data</span>
-<span class="n">patient_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/ehr_data.csv&quot;</span><span class="p">)</span>
+<span class="n">patient_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/ehr_data.csv&quot;</span><span class="p">)</span>
 
 <span class="c1"># splitting data into train and test splits</span>
 <span class="n">patient_train</span><span class="p">,</span> <span class="n">patient_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">patient_data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">patient_data</span><span class="p">[</span><span class="s2">&quot;SOURCE&quot;</span><span class="p">])</span>
@@ -391,73 +391,111 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># read in data</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">patient_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/ehr_data.csv&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># splitting data into train and test splits</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">patient_train</span><span class="p">,</span> <span class="n">patient_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">patient_data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">patient_data</span><span class="p">[</span><span class="s2">&quot;SOURCE&quot;</span><span class="p">])</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">File ~\miniconda3\Lib\site-packages\pandas\io\parsers\readers.py:1024,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1011</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1012</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1013</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1020</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1021</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1022</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1024</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File ~\miniconda3\Lib\site-packages\pandas\io\parsers\readers.py:618,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">615</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">618</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">620</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">621</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File ~\miniconda3\Lib\site-packages\pandas\io\parsers\readers.py:1618,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1615</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1617</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1618</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File ~\miniconda3\Lib\site-packages\pandas\io\parsers\readers.py:1878,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1876</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1877</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1878</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1879</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1880</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1887</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1888</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File ~\miniconda3\Lib\site-packages\pandas\io\common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/ehr_data.csv&#39;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>HAEMATOCRIT</th>
+      <th>HAEMOGLOBINS</th>
+      <th>ERYTHROCYTE</th>
+      <th>LEUCOCYTE</th>
+      <th>THROMBOCYTE</th>
+      <th>MCH</th>
+      <th>MCHC</th>
+      <th>MCV</th>
+      <th>AGE</th>
+      <th>SEX</th>
+      <th>SOURCE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3536</th>
+      <td>36.5</td>
+      <td>11.9</td>
+      <td>4.20</td>
+      <td>9.7</td>
+      <td>333</td>
+      <td>28.3</td>
+      <td>32.6</td>
+      <td>86.9</td>
+      <td>67</td>
+      <td>M</td>
+      <td>in</td>
+    </tr>
+    <tr>
+      <th>3895</th>
+      <td>34.0</td>
+      <td>11.4</td>
+      <td>3.99</td>
+      <td>2.1</td>
+      <td>254</td>
+      <td>28.6</td>
+      <td>33.5</td>
+      <td>85.2</td>
+      <td>73</td>
+      <td>F</td>
+      <td>in</td>
+    </tr>
+    <tr>
+      <th>3250</th>
+      <td>36.3</td>
+      <td>12.2</td>
+      <td>4.23</td>
+      <td>13.1</td>
+      <td>390</td>
+      <td>28.8</td>
+      <td>33.6</td>
+      <td>85.8</td>
+      <td>63</td>
+      <td>M</td>
+      <td>out</td>
+    </tr>
+    <tr>
+      <th>3741</th>
+      <td>34.1</td>
+      <td>11.0</td>
+      <td>3.66</td>
+      <td>11.5</td>
+      <td>872</td>
+      <td>30.1</td>
+      <td>32.3</td>
+      <td>93.2</td>
+      <td>70</td>
+      <td>M</td>
+      <td>out</td>
+    </tr>
+    <tr>
+      <th>1442</th>
+      <td>40.4</td>
+      <td>13.5</td>
+      <td>4.44</td>
+      <td>4.4</td>
+      <td>184</td>
+      <td>30.4</td>
+      <td>33.4</td>
+      <td>91.0</td>
+      <td>35</td>
+      <td>F</td>
+      <td>out</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><em>Table 1: Preview of the patient records of lab results, age, sex, and treatment</em></p>
 <p>Let’s have a look some information about the data.</p>
@@ -532,23 +570,23 @@ memory usage: 330.8+ KB
 <div class="cell_output docutils container">
 <div class="output text_html">
 <style>
-  #altair-viz-08dc9e47d11f42fd829779467a77235b.vega-embed {
+  #altair-viz-bf10b2c398894749a2a621a6c1747ac7.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-08dc9e47d11f42fd829779467a77235b.vega-embed details,
-  #altair-viz-08dc9e47d11f42fd829779467a77235b.vega-embed details summary {
+  #altair-viz-bf10b2c398894749a2a621a6c1747ac7.vega-embed details,
+  #altair-viz-bf10b2c398894749a2a621a6c1747ac7.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-08dc9e47d11f42fd829779467a77235b"></div>
+<div id="altair-viz-bf10b2c398894749a2a621a6c1747ac7"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-08dc9e47d11f42fd829779467a77235b") {
-      outputDiv = document.getElementById("altair-viz-08dc9e47d11f42fd829779467a77235b");
+    if (outputDiv.id !== "altair-viz-bf10b2c398894749a2a621a6c1747ac7") {
+      outputDiv = document.getElementById("altair-viz-bf10b2c398894749a2a621a6c1747ac7");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -630,23 +668,23 @@ Meanwhile, the age of the patients does not seem to be normally distributed.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <style>
-  #altair-viz-e8d851d7fd1140da8661e6079cbd24b2.vega-embed {
+  #altair-viz-0c2b41c8bda141a8aedb4a59b26fb140.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e8d851d7fd1140da8661e6079cbd24b2.vega-embed details,
-  #altair-viz-e8d851d7fd1140da8661e6079cbd24b2.vega-embed details summary {
+  #altair-viz-0c2b41c8bda141a8aedb4a59b26fb140.vega-embed details,
+  #altair-viz-0c2b41c8bda141a8aedb4a59b26fb140.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e8d851d7fd1140da8661e6079cbd24b2"></div>
+<div id="altair-viz-0c2b41c8bda141a8aedb4a59b26fb140"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e8d851d7fd1140da8661e6079cbd24b2") {
-      outputDiv = document.getElementById("altair-viz-e8d851d7fd1140da8661e6079cbd24b2");
+    if (outputDiv.id !== "altair-viz-0c2b41c8bda141a8aedb4a59b26fb140") {
+      outputDiv = document.getElementById("altair-viz-0c2b41c8bda141a8aedb4a59b26fb140");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
