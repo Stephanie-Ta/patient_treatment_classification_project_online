@@ -5,12 +5,12 @@ root: Introduction
 parts:
   - caption: Information
     chapters:
-    - file: Lab_Result_Info.md
+    - file: doc/Lab_Result_Info.md
   - caption: Analysis
     chapters:
-    - file: Exploratory_Data_Analysis.ipynb
-    - file: Methods_and_Results.ipynb
+    - file: reports/Exploratory_Data_Analysis.ipynb
+    - file: reports/Methods_and_Results.ipynb
   - caption: Conclusion
     chapters:
-    - file: Discussion.md
-    - file: References.md
+    - file: doc/Discussion.md
+    - file: doc/References.md

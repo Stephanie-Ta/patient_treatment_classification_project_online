@@ -2,7 +2,7 @@
 
 title: Patient Treatment Classification Project
 author: Stephanie Ta
-logo: logo.jpg
+logo: img/logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
